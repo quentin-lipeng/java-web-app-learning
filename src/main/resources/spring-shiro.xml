@@ -103,10 +103,16 @@
         <property name="arguments" ref="jedisShiroSessionRepository"/>
     </bean>
 
+    <!--    给realm加密-->
+<!--    <bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">-->
+<!--        <property name="hashAlgorithmName" value="MD5"/>-->
+<!--        <property name="storedCredentialsHexEncoded" value="false"/>-->
+<!--    </bean>-->
 
     <!-- 授权 认证 -->
-    <bean id="sampleRealm" class="com.sojson.core.shiro.token.SampleRealm"/>
-
+    <bean id="sampleRealm" class="com.sojson.core.shiro.token.SampleRealm">
+<!--        <property name="credentialsMatcher" ref="credentialsMatcher"/>-->
+    </bean>
 
     <!-- Session Manager -->
     <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
@@ -173,11 +179,11 @@
         <property name="filterChainDefinitions" value="#{shiroManager.loadFilterChainDefinitions()}"/>
         <property name="filters">
             <util:map>
-                <entry key="login" value-ref="login"></entry>
-                <entry key="role" value-ref="role"></entry>
-                <entry key="simple" value-ref="simple"></entry>
-                <entry key="permission" value-ref="permission"></entry>
-                <entry key="kickout" value-ref="kickoutSessionFilter"></entry>
+                <entry key="login" value-ref="login"/>
+                <entry key="role" value-ref="role"/>
+                <entry key="simple" value-ref="simple"/>
+                <entry key="permission" value-ref="permission"/>
+                <entry key="kickout" value-ref="kickoutSessionFilter"/>
             </util:map>
         </property>
     </bean>
